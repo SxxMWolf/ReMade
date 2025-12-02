@@ -28,7 +28,7 @@ import {
 } from '../atoms';
 import { deleteTicketAtom, updateTicketAtom, myTicketsAtom } from '../atoms/ticketsAtomsApi';
 import { userProfileAtom } from '../atoms/userAtomsApi';
-import { ticketService } from '../services/api/ticketService';
+import { ticketService } from '../services/api';
 import { TicketDetailModalProps } from '../types/componentProps';
 import PrivacySelectionModal from './PrivacySelectionModal';
 import {
