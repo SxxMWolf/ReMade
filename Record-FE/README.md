@@ -2,6 +2,7 @@
 
 공연 티켓 기록 및 리뷰 관리 시스템 - Full Stack 프로젝트
 
+
 ## 목차
 
 1. [설치하기](#설치하기)
@@ -12,6 +13,8 @@
 6. [의존성](#의존성)
 7. [오픈소스](#오픈소스)
 8. [프로젝트 구조](#프로젝트-구조)
+9. [개요 및 시스템 구조도](#개요-및-시스템-구조도)
+10. [화면 구성](#화면-구성)
 
 ## 설치하기
 
@@ -57,15 +60,13 @@ cd Record-FE/ios && bundle exec pod install  # iOS만 (macOS)
 
 **먼저 디비 테이블을 꼭 생성하세요.**
 
-`Record-BE/Record-BE/schema.sql` 파일을 사용하여 데이터베이스 스키마를 생성하세요:
+`Record-BE/Record-BE/schema.sql` 파일을 사용하여 데이터베이스 스키마를 생성할 수 있습니다:
 
 ```bash
 psql -U recorduser -d recorddb -f "Record-BE/Record-BE/schema.sql"
 ```
 
-테이블 생성이 완료된 후, 아래 명령어로 샘플 데이터를 생성할 수 있습니다.
-
-개발 및 테스트를 위한 샘플 데이터를 생성할 수 있습니다.
+테이블 생성이 완료된 후, 아래 명령어로 개발 및 테스트를 위한 샘플 데이터를 생성할 수 있습니다.
 
 ```bash
 chmod +x generate-sample-data.sh
@@ -146,25 +147,47 @@ make fe-test
 
 ## 프로젝트 구조
 
+## Frontend (Record-FE)
 ```
-Record-BE/
+Record-FE/
 ├── src/
-│   ├── main/java/com/example/record/
-│   │   ├── auth/          # 인증
-│   │   ├── user/           # 사용자 관리
-│   │   ├── review/         # 리뷰 관리
-│   │   ├── ocr/            # OCR 기능
-│   │   ├── STTorText/      # STT 기능
-│   │   └── AWS/            # S3 통합
-│   └── resources/
-│       └── application.yml
-├── generate-sample-data.sh
-├── schema.sql
+│   ├── assets/            # 이미지 리소스
+│   ├── atoms/              # Jotai 상태 관리
+│   ├── components/         # React 컴포넌트
+│   │   └── ui/            # UI 컴포넌트
+│   ├── constants/          # 상수 정의
+│   ├── hooks/              # 커스텀 훅
+│   ├── pages/              # 페이지 컴포넌트
+│   │   ├── add-ticket/    # 티켓 추가
+│   │   ├── archive/        # 아카이브
+│   │   ├── auth/           # 인증
+│   │   ├── calendar/       # 캘린더
+│   │   ├── home/           # 홈
+│   │   └── my-page/        # 마이페이지
+│   ├── services/           # API 및 서비스
+│   │   ├── api/           # API 클라이언트
+│   │   └── auth/          # 인증 서비스
+│   ├── styles/             # 스타일 정의
+│   ├── types/              # TypeScript 타입
+│   └── utils/              # 유틸리티 함수
+├── android/                
+├── ios/                    # iOS 네이티브
+├── App.tsx                 # 앱 진입점
+├── index.js               
+├── package.json
+├── tsconfig.json
+├── app.json
 └── Makefile
 ```
 
-## 프로젝트 개요
+## 개요 및 시스템 구조도
+
+<img width="1396" height="796" alt="구조도" src="https://github.com/user-attachments/assets/90c7efa8-fe40-4a9a-bc4a-ff3ec459ce27" />
+
 
 - **Backend**: Spring Boot 3.2.5 (Java 21), PostgreSQL, JWT 인증
 - **Frontend**: React Native 0.81.0 (TypeScript)
 - **주요 기능**: 티켓 관리, OCR, STT, AI 이미지 생성, 리뷰 작성
+
+## 화면 구성
+<img width="2887" height="5810" alt="화면 구성" src="https://github.com/user-attachments/assets/160d3aad-bc44-4f05-b83f-72a9cf4f5279" />
